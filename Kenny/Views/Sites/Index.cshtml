@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Kenny.Models.Site>
+
+@{
+    ViewBag.Title = "Sites";
+}
+
+<h1>Sites</h1>
+
+<p>
+	<a class="btn" href="@Url.Action("Create", "Sites")"><i class="icon-plus"></i> Add Site</a>
+</p>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.BaseUrl)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.AuthenticatedUrl)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model) {
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.BaseUrl)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.AuthenticatedUrl)
+				</td>
+				<td>
+					<a class="btn btn-small" href="@Url.Action("Edit", "Sites", new { id=item.Id })"><i class="icon-edit"></i> Edit</a>
+					<a class="btn btn-small" href="@Url.Action("Delete", "Sites", new { id=item.Id })"><i class="icon-remove"></i> Delete</a>
+					<a class="btn btn-small" href="@Url.Action("Index", "FoundLogins", new { siteId = item.Id })"><i class="icon-eye-open"></i> View Logins</a>
+					@using (Html.BeginForm("Collect", "FoundLogins", new { siteId = item.Id })) {
+						<button type="submit" value="Collect" class="btn btn-small"><i class="icon-download-alt"></i> Collect Logins</button>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<style>
+	form { display: inline;	}
+</style>

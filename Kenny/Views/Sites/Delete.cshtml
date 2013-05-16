@@ -1,0 +1,17 @@
+﻿@model Kenny.Models.Site
+
+@{
+	ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<p>Are you sure you want to delete @Html.DisplayFor(model => model.Name)?</p>
+
+@using (Html.BeginForm())
+{
+	<p>
+		<button type="submit" value="Delete" class="btn">Delete</button>
+		@Html.ActionLink("Cancel", "Index")
+	</p>
+}

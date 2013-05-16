@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Kenny.Models.FoundLogin>
+
+@{
+	ViewBag.Title = "Found Logins";
+}
+
+@if (Model.Count() > 0) {
+	<h2>@Model.First().Site.Name Logins</h2>
+} else {
+	<h2>No Logins Found</h2>
+}
+
+@foreach (var item in Model)
+{
+	<div class="row login">
+		<div class="span2">@Html.DisplayFor(modelItem => item.Username):@Html.DisplayFor(modelItem => item.Password)</div>
+		<div class="span3">
+			<a target="_blank" class="btn btn-mini" href="http://@item.Username:@item.Password&#64;@item.Site.AuthenticatedUrl"><i class="icon-eye-open"></i> Test</a>
+			@if (!item.IsValid.HasValue) {
+				using (Html.BeginForm("Validate", "FoundLogins", new { id = item.Id })) {
+				<button type="submit" value="Valid" title="Valid" class="btn btn-mini"><i class="icon-ok"></i></button>
+				}
+			}
+			@using (Html.BeginForm("Invalidate", "FoundLogins", new { id = item.Id })) {
+				<button type="submit" value="Invalid" title="Invalid" class="btn btn-mini"><i class="icon-ban-circle"></i></button>
+			}
+		</div>
+	</div>
+}
+
+<style>
+	form { display: inline;	}
+	.login { margin-bottom: 7px; }
+</style>

@@ -8,23 +8,39 @@ using System.Web.Security;
 
 namespace Kenny.Models
 {
-	public class UsersContext : DbContext
+	public class KennyContext : DbContext
 	{
-		public UsersContext()
-			: base("DefaultConnection")
+		public KennyContext()
+			: base("KennyContext")
 		{
 		}
 
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Site>().HasRequired(p => p.Owner)
+				.WithMany(o => o.Sites)
+				.HasForeignKey(s => s.OwnerId);
+		}
+
 		public DbSet<UserProfile> UserProfiles { get; set; }
+		public DbSet<Site> Sites { get; set; }
+		public DbSet<FoundLogin> FoundLogins { get; set; }
 	}
 
 	[Table("UserProfile")]
 	public class UserProfile
 	{
+		public UserProfile()
+		{
+			this.Sites = new HashSet<Site>();
+		}
+
 		[Key]
 		[DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
 		public int UserId { get; set; }
 		public string UserName { get; set; }
+
+		public virtual ICollection<Site> Sites { get; set; }
 	}
 
 	public class RegisterExternalLoginModel

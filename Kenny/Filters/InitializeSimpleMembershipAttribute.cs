@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using Kenny.Models;
+using Kenny.Migrations;
 
 namespace Kenny.Filters
 {
@@ -25,11 +26,9 @@ namespace Kenny.Filters
 		{
 			public SimpleMembershipInitializer()
 			{
-				Database.SetInitializer<UsersContext>(null);
-
 				try
 				{
-					using (var context = new UsersContext())
+					using (var context = new KennyContext())
 					{
 						if (!context.Database.Exists())
 						{
@@ -38,7 +37,9 @@ namespace Kenny.Filters
 						}
 					}
 
-					WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+					WebSecurity.InitializeDatabaseConnection("KennyContext", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+
+					Database.SetInitializer(new MigrateDatabaseToLatestVersion<KennyContext, Configuration>());
 				}
 				catch (Exception ex)
 				{
