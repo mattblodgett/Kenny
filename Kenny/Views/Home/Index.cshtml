@@ -1,18 +1,25 @@
 ﻿@{
-    ViewBag.Title = "Kenny";
+	ViewBag.Title = "Kenny";
 }
 
-<div class="hero-unit">
-	<h1>Kenny finds logins</h1>
-	<p></p>
-	<p>Enter your HTTP basic authentication-based sites, and Kenny will show you logins that have been leaked on the public Web.</p>
-	@if (Request.IsAuthenticated) {
-		<p>@Html.ActionLink("Go to your sites »", "Index", "Sites", new {}, new { @class = "btn btn-primary btn-large" })</p>
-	} else {
-		<p>@Html.ActionLink("Get started »", "Login", "Account", new {}, new { @class = "btn btn-primary btn-large" })</p>
-	}
+<link type="text/css" rel="stylesheet" href="~/Assets/css/home.css" />
+
+<div id="hero">
+	<div class="wrap">
+		<div class="brand">
+			<img src="https://dl.dropboxusercontent.com/u/93604/img/kenny-loggins-ascii.png" class="kenny-logo" alt="Kenny logo">
+			<h1>Kenny</h1>
+		</div>
+		<h3 class="tagline"> &nbsp;finds logins.</h3>
+		@if (Request.IsAuthenticated) {
+			<p>@Html.ActionLink("Go to your sites »", "Index", "Sites", new { }, new { @class = "btn btn-inverse btn-large" })</p>
+		} else {
+			<p>@Html.ActionLink("Get started »", "Login", "Account", new { }, new { @class = "btn btn-inverse btn-large" })</p>
+		}
+	</div>
 </div>
+
 <hr />
 <footer>
-	<p>© <a href="http://www.mattblodgett.com">Matt Blodgett</a> 2013</p>
+	<p>© <a href="http://www.mattblodgett.com">Matt Blodgett</a> @DateTime.Now.Year</p>
 </footer>

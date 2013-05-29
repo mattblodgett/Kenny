@@ -1,0 +1,78 @@
+﻿#hero {
+	padding: 40px 0 60px;
+	line-height: 1.2;
+	color: #686D70;
+	margin-bottom: 200px;
+}
+
+#hero .wrap {
+	padding-left: 350px;
+	width: auto;
+	position: relative;
+}
+
+.wrap {
+	padding: 10px;
+	max-width: 900px;
+	margin: 10px auto;
+}
+
+#hero .brand, #hero h3 {
+	text-align: left;
+}
+
+#hero .kenny-logo {
+	left: -20px;
+	top: 0px;
+	width: 360px;
+	display: block;
+	position: absolute;
+	vertical-align: bottom;
+}
+
+#hero h1 {
+	font-size: 110px;
+	line-height: 1;
+	display: inline-block;
+	margin: 0;
+	color: #C9B01F;
+}
+
+#hero h1, #hero h3 {
+	letter-spacing: -0.04em;
+}
+
+#hero .tagline {
+	font-size: 54px;
+	line-height: 1;
+}
+
+#hero h3 {
+	font-size: 28px;
+	margin: 0 0 30px;
+	font-size: 18px;
+	text-align: left;
+}
+
+#hero .brand, #hero h3 {
+	text-align: left;
+}
+
+#hero .button {
+	display: inline-block;
+	clear: both;
+	background-color: #000000;
+	padding: 10px 15px;
+	font-weight: bold;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+	font-size: 16px;
+	border-radius: 5px;
+	text-shadow: 0 -1px hsla(0, 0%, 0%, 0.4);
+	background-image: -webkit-linear-gradient( hsla(0, 0%, 100%, 0.1), hsla(0, 0%, 100%, 0.0) 50%, hsla(0, 0%, 0%, 0.0) 50%, hsla(0, 0%, 0%, 0.1) );
+}
+
+footer a {
+	color: #C9B01F;
+}
