@@ -24,19 +24,6 @@ namespace Kenny.Controllers
         }
 
         //
-        // GET: /Sites/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            Site site = db.Sites.Find(id);
-            if (site == null)
-            {
-                return HttpNotFound();
-            }
-            return View(site);
-        }
-
-        //
         // GET: /Sites/Create
 
         public ActionResult Create()
@@ -68,12 +55,13 @@ namespace Kenny.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Site site = db.Sites.Find(id);
-            if (site == null)
-            {
-                return HttpNotFound();
-            }
-            return View(site);
+			UserProfile currentUser = db.UserProfiles.FirstOrDefault(u => u.UserName == User.Identity.Name);
+			Site site = db.Sites.Find(id);
+			if (site == null || site.OwnerId != currentUser.UserId)
+			{
+				return HttpNotFound();
+			}
+			return View(site);
         }
 
         //
@@ -96,12 +84,13 @@ namespace Kenny.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Site site = db.Sites.Find(id);
-            if (site == null)
-            {
-                return HttpNotFound();
-            }
-            return View(site);
+			UserProfile currentUser = db.UserProfiles.FirstOrDefault(u => u.UserName == User.Identity.Name);
+			Site site = db.Sites.Find(id);
+			if (site == null || site.OwnerId != currentUser.UserId)
+			{
+				return HttpNotFound();
+			}
+			return View(site);
         }
 
         //

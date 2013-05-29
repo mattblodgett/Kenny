@@ -67,6 +67,13 @@ namespace Kenny.Controllers
 
 		public ActionResult Index(int siteId = 0)
 		{
+			UserProfile currentUser = db.UserProfiles.FirstOrDefault(u => u.UserName == User.Identity.Name);
+			Site site = db.Sites.Find(siteId);
+			if (site == null || site.OwnerId != currentUser.UserId)
+			{
+				return HttpNotFound();
+			}
+
 			var foundLogins = new List<FoundLogin>();
 
 			if (siteId > 0)
@@ -77,19 +84,6 @@ namespace Kenny.Controllers
 			foundLogins = foundLogins.OrderByDescending(l => l.IsValid).ToList();
 
 			return View(foundLogins);
-		}
-
-		//
-		// GET: /FoundLogins/Details/5
-
-		public ActionResult Details(int id = 0)
-		{
-			FoundLogin foundLogin = db.FoundLogins.Find(id);
-			if (foundLogin == null)
-			{
-				return HttpNotFound();
-			}
-			return View(foundLogin);
 		}
 
 		protected override void Dispose(bool disposing)
