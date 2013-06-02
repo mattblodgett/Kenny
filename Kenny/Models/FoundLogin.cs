@@ -24,5 +24,8 @@ namespace Kenny.Models
 
 		[Display(Name = "Source")]
 		public string SourceUrl { get; set; }
+
+		[Display(Name = "Date Collected")]
+		public DateTime? DateCollected { get; set; }
     }
 }

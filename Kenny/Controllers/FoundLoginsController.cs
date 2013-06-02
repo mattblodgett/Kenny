@@ -45,17 +45,14 @@ namespace Kenny.Controllers
 		{
 			Site site = db.Sites.Find(siteId);
 			FoundLoginCollector collector = new FoundLoginCollector();
-			Dictionary<string, string> collectedLogins = collector.CollectLogins(site.AuthenticatedUrl);
+			List<FoundLogin> collectedLogins = collector.CollectLogins(site.AuthenticatedUrl);
 			List<FoundLogin> currentLoginsForSite = db.FoundLogins.Where(l => l.Site.Id == siteId).ToList();
-			foreach (var newLoginPair in collectedLogins)
+			foreach (FoundLogin collectedLogin in collectedLogins)
 			{
-				if (!currentLoginsForSite.Any(l => l.Username == newLoginPair.Key))
+				if (!currentLoginsForSite.Any(l => l.Username == collectedLogin.Username))
 				{
-					FoundLogin newLogin = new FoundLogin();
-					newLogin.Username = newLoginPair.Key;
-					newLogin.Password = newLoginPair.Value;
-					newLogin.Site = site;
-					db.FoundLogins.Add(newLogin);
+					collectedLogin.Site = site;
+					db.FoundLogins.Add(collectedLogin);
 				}
 			}
 			db.SaveChanges();

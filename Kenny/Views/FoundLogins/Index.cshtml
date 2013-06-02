@@ -13,17 +13,24 @@
 @foreach (var item in Model)
 {
 	<div class="row login">
-		<div class="span2">@Html.DisplayFor(modelItem => item.Username):@Html.DisplayFor(modelItem => item.Password)</div>
-		<div class="span3">
+		<div class="span2">
+			@Html.DisplayFor(modelItem => item.Username):@Html.DisplayFor(modelItem => item.Password)
+		</div>
+		<div class="span4">
 			<a target="_blank" class="btn btn-mini" href="http://@item.Username:@item.Password&#64;@item.Site.AuthenticatedUrl"><i class="icon-eye-open"></i> Test</a>
 			@if (!item.IsValid.HasValue) {
 				using (Html.BeginForm("Validate", "FoundLogins", new { id = item.Id })) {
-				<button type="submit" value="Valid" title="Valid" class="btn btn-mini"><i class="icon-ok"></i></button>
+				<button type="submit" value="Valid" class="btn btn-mini"><i class="icon-ok"></i> Valid</button>
 				}
 			}
 			@using (Html.BeginForm("Invalidate", "FoundLogins", new { id = item.Id })) {
-				<button type="submit" value="Invalid" title="Invalid" class="btn btn-mini"><i class="icon-ban-circle"></i></button>
+				<button type="submit" value="Invalid" class="btn btn-mini"><i class="icon-ban-circle"></i> Invalid</button>
 			}
+			<a class="source-popover btn btn-mini" rel="popover"><i class="icon-info-sign"></i> Source...</a>
+			<div style="display: none;">
+				<p>Collected: @(item.DateCollected.HasValue ? item.DateCollected.Value.ToShortDateString() : "N/A")</p>
+				<p><a target="_blank" href="@item.SourceUrl">@item.SourceUrl</a></p>
+			</div>
 		</div>
 	</div>
 }
@@ -32,3 +39,16 @@
 	form { display: inline;	}
 	.login { margin-bottom: 7px; }
 </style>
+
+<script>
+	$(function () {
+		$(".source-popover").popover({
+			html: true,
+			title: "Source",
+			content: function () {
+				var $content = $(this).next();
+				return $content.html();
+			}
+		});
+	});
+</script>
