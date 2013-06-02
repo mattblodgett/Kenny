@@ -29,7 +29,7 @@
 			<a class="source-popover btn btn-mini" rel="popover"><i class="icon-info-sign"></i> Source...</a>
 			<div style="display: none;">
 				<p>Collected: @(item.DateCollected.HasValue ? item.DateCollected.Value.ToShortDateString() : "N/A")</p>
-				<p><a target="_blank" href="@item.SourceUrl">@item.SourceUrl</a></p>
+				<p class="source-url"><a target="_blank" href="@item.SourceUrl">@item.SourceUrl</a></p>
 			</div>
 		</div>
 	</div>
@@ -38,6 +38,7 @@
 <style>
 	form { display: inline;	}
 	.login { margin-bottom: 7px; }
+	.source-url { word-wrap: break-word; }
 </style>
 
 <script>
