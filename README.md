@@ -7,4 +7,4 @@ Check out the demo on AppHarbor:
 
 <http://kenny.apphb.com/>
 
-![Kenny Loggins](https://dl.dropboxusercontent.com/u/93604/img/kenny-loggins-ascii.png "Kenny is watching you.")
+![Kenny Loggins](https://i.imgur.com/utVW9TP.png "Kenny is watching you.")
